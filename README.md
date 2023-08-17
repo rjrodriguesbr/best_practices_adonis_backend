@@ -48,6 +48,10 @@ Ele cria vários métodos, mas por conversão padrão os métodos utilizados par
 - update(PUT, PATCH) : atualizando um dado
 - destroy(DELETE) : Excluir um dado da tabela
 
+## Seeders
+Ao utilizar o código abaixo ele verifica se está em produção e impede de rodar as seeders com esse metodo sendo true
+`public static developmentOnly = true`
+
 ## Rotas
 Para fornecer as rotas de conversão padrão de API, podemos utilizar:
 `Route.resource('/posts', 'PostsController').apiOnly()`
