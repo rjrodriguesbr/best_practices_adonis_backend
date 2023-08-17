@@ -7,7 +7,14 @@ export default class PostsController {
   }
 
   public async store({ request }: HttpContextContract) {
-    const data = request.only(['title', 'content'])
+    const data = request.only(['title', 'content', 'slug'])
+
+    data.slug = data.title
+    .toLowerCase() // Converte para letras minúsculas
+    .replace(/[^\w\s-]/g, '') // Remove caracteres especiais
+    .replace(/\s+/g, '-') // Substitui espaços em branco por hífens
+    .replace(/-+/g, '-'); // Remove hífens duplicados
+
     const post = await Post.create(data)
 
     return post
@@ -21,7 +28,13 @@ export default class PostsController {
 
   public async update({ request, params }: HttpContextContract) {
     const post = await Post.findOrFail(params.id)
-    const data = request.only(['title', 'content'])
+    const data = request.only(['title', 'content', 'slug'])
+
+    data.slug = data.title
+    .toLowerCase() // Converte para letras minúsculas
+    .replace(/[^\w\s-]/g, '') // Remove caracteres especiais
+    .replace(/\s+/g, '-') // Substitui espaços em branco por hífens
+    .replace(/-+/g, '-'); // Remove hífens duplicados
 
     post.merge(data)
 

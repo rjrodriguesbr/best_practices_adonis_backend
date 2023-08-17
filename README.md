@@ -31,3 +31,24 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'secret';
 flush privileges;
 
 ## Lucid ORM e Migrations
+Pode utilizar o timestamps para criar o create_at e update_at na migration
+`table.timestamps(true)`
+
+No Model pode utilizar um alias para passar opções para mudar o nome. Nesse exemplo no banco de dados a coluna se chama 'content' mas podemos utilizar no Model para chamar nos Controllers como 'body'.
+
+`@column({ columnName: 'content' })`
+`public body: string`
+
+Para criar o controller com os métodos padrões de API pode passar o '-r':
+`node ace make:controller Posts -r`
+Ele cria vários métodos, mas por conversão padrão os métodos utilizados para API são:
+- index(GET) : para retornar um conjunto de dados
+- store(POST) : para criar um dado novo no model
+- show(GET) : exibindo apenas um dado que é filtrado
+- update(PUT, PATCH) : atualizando um dado
+- destroy(DELETE) : Excluir um dado da tabela
+
+## Rotas
+Para fornecer as rotas de conversão padrão de API, podemos utilizar:
+`Route.resource('/posts', 'PostsController').apiOnly()`
+Dessa forma ele já cria as rotas index, store, show, update e destroy com seus respectivos métodos.

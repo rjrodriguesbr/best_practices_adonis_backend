@@ -8,6 +8,9 @@ export default class Post extends BaseModel {
   @column()
   public title: string
 
+  @column()
+  public slug: string
+
   @column({columnName: 'content'})
   public body: string
 
